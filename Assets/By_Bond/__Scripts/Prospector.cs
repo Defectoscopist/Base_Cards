@@ -10,9 +10,12 @@ public class Prospector : MonoBehaviour
 
     [Header("Set in Inspector")]
     public TextAsset deckXML;
+    public TextAsset layoutXML;
 
     [Header("Set Dynamically")]
     public Deck deck;
+    public Layout layout;
+
 
     void Awake()
     {
@@ -25,11 +28,13 @@ public class Prospector : MonoBehaviour
         deck.InitDeck(deckXML.text); // передать в DeckXML
         Deck.Shuffle(ref deck.cards); // перемешать колоду и передать ее по ссылке
 
-        Card c;
+        /*Card c;
         for (int cNum = 0; cNum < deck.cards.Count; cNum++) // Вывести все карты в перемешанном порядке
         {
             c = deck.cards[cNum];
             c.transform.localPosition = new Vector3((cNum % 13) * 3, cNum / 13 * 4, 0);
-        }
+        }*/
+        layout = GetComponent<Layout>();
+        layout.ReadLayout(layoutXML.text);
     }
 }
